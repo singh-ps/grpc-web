@@ -1,8 +1,9 @@
-import GrpcWebClient from "./grpcWebClient.js";
-import { Operation } from "./generated/grpc-web_pb.js";
+import GrpcWebClient from "./grpcWebClient";
+import { Operation } from "./generated/grpc-web_pb";
 
 async function testEcho() {
     const client = new GrpcWebClient();
+    console.log("Sending echo request...");
     try {
         const response = await client.echo("Hello, gRPC-Web Sending To Server!");
         alert("Echo response: " + response);

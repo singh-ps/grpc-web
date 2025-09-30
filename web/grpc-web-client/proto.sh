@@ -30,5 +30,7 @@ protoc \
   --grpc-web_out="import_style=typescript,mode=grpcweb:${OUT_DIR}" \
   grpc-web.proto
 
+node ./transformGrpcToNamed.js "$OUT_DIR"
+
 echo "Done. Files in $OUT_DIR:"
 ls -la "$OUT_DIR"
