@@ -2,14 +2,21 @@
   "name": "grpc-web-client",
   "version": "0.1.0",
   "dependencies": {
+    "google-protobuf": "^3.21.4",
+    "grpc-web": "^1.5.0",
     "http-server": "14.0.0"
   },
   "scripts": {
-    "start": "npm run build && http-server . -p 8080",
-    "build": "tsc && tsc --build",
-    "watch": "tsc --watch"
+    "start": "npm run build && http-server . -c-1 -p 8080",
+    "build": "npm run proto-regen && tsc && tsc --build",
+    "watch": "tsc --watch",
+    "proto-gen": "./proto.sh",
+    "clean": "rm -rf dist src/generated",
+    "proto-regen": "npm run clean && npm run proto-gen"
   },
   "devDependencies": {
+    "@types/google-protobuf": "^3.15.12",
+    "ts-protoc-gen": "^0.15.0",
     "typescript": "^5.9.2"
   }
 }
