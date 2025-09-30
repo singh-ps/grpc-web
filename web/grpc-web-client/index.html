@@ -2,13 +2,141 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>GRPC Web Client</title>
+    <style>
+        :root {
+            --gap: 12px;
+            --primary: #2563eb;
+            --error: #b91c1c;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+            margin: 24px;
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            display: grid;
+            gap: 24px;
+        }
+
+        .card {
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 16px;
+        }
+
+        .row {
+            display: flex;
+            gap: var(--gap);
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        input,
+        select,
+        button {
+            height: 36px;
+            padding: 6px 10px;
+            font: inherit;
+        }
+
+        input,
+        select {
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            min-width: 160px;
+        }
+
+        input:focus,
+        select:focus {
+            outline: 2px solid #93c5fd;
+            border-color: #93c5fd;
+        }
+
+        button {
+            background: var(--primary);
+            color: white;
+            border: 0;
+            border-radius: 6px;
+            padding: 6px 14px;
+            cursor: pointer;
+        }
+
+        button[disabled] {
+            opacity: .6;
+            cursor: not-allowed;
+        }
+
+        .status {
+            min-height: 1.25em;
+            color: #334155;
+        }
+
+        .error {
+            color: var(--error);
+        }
+
+        .muted {
+            color: #64748b;
+        }
+
+        .history {
+            font-size: .9em;
+            color: #475569;
+            margin-top: 8px;
+        }
+
+        .spacer {
+            flex: 1 1 auto;
+        }
+    </style>
 </head>
 
 <body>
-    <h1>GRPC Web Client</h1>
+    <div class="container">
+        <div class="card" id="echo-card">
+            <h2>Echo</h2>
+            <div class="row">
+                <label for="echo-input">Message</label>
+                <input id="echo-input" type="text" placeholder="Type a message" />
+                <button id="echo-btn" type="button">Send</button>
+                <span id="echo-spin" class="muted" hidden>⏳</span>
+            </div>
+            <div id="echo-out" class="status" aria-live="polite"></div>
+            <div id="echo-history" class="history"></div>
+        </div>
+
+        <div class="card" id="calc-card">
+            <h2>Calculator</h2>
+            <form id="calc-form">
+                <div class="row">
+                    <label for="a">A</label>
+                    <input id="a" inputmode="decimal" placeholder="Number 1" />
+                    <label for="op">Op</label>
+                    <select id="op"></select>
+                    <label for="b">B</label>
+                    <input id="b" inputmode="decimal" placeholder="Number 2" />
+                    <button id="calc-go" type="submit">=</button>
+                    <span id="calc-spin" class="muted" hidden>⏳</span>
+                    <span class="spacer"></span>
+                    <input id="ans" placeholder="Answer" readonly style="width: 200px" />
+                </div>
+            </form>
+            <div id="calc-err" class="status error" role="alert" aria-live="assertive"></div>
+        </div>
+    </div>
+
     <script type="module" src="./src/index.ts"></script>
 </body>
 
