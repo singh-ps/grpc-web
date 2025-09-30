@@ -1,3 +1,7 @@
-**/target
+**/dist
 **/generated
-**/.DS_Store
+**/node_modules
+**/target
+tsconfig.tsbuildinfo
+
+.DS_Store
