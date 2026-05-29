@@ -5,7 +5,7 @@ echo "Generating gRPC-Web"
 
 OUT_DIR="./src/generated"
 PROTO_DIR="../../protos"
-PROTOC_GEN_TS_PATH="./node_modules/.bin/protoc-gen-ts"
+PROTOC_GEN_ES_PATH="./node_modules/.bin/protoc-gen-es"
 
 # Find include dir for google/protobuf/*.proto
 if [[ -d "/opt/homebrew/include/google" ]]; then
@@ -25,12 +25,11 @@ mkdir -p "$OUT_DIR"
 protoc \
   -I="$PROTO_DIR" \
   -I="$INC_DIR" \
-  --plugin="protoc-gen-ts=${PROTOC_GEN_TS_PATH}" \
-  --js_out="import_style=commonjs,binary:${OUT_DIR}" \
+  --plugin="protoc-gen-es=${PROTOC_GEN_ES_PATH}" \
+  --es_out="${OUT_DIR}" \
+  --es_opt=target=ts \
   --grpc-web_out="import_style=typescript,mode=grpcweb:${OUT_DIR}" \
   grpc-web.proto
-
-node ./transformGrpcToNamed.js "$OUT_DIR"
 
 echo "Done. Files in $OUT_DIR:"
 ls -la "$OUT_DIR"

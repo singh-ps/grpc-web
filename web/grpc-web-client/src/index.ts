@@ -1,7 +1,6 @@
-import GrpcWebClient from "./grpcWebClient";
-import { Operation } from "./generated/grpc-web_pb";
+import GrpcWebClient, { Operation } from "./grpcWebClient";
 
-const client = new GrpcWebClient("http://localhost:10000");
+const client: GrpcWebClient = new GrpcWebClient("http://localhost:10000");
 
 document.addEventListener("DOMContentLoaded", () => {
     // Echo wiring
