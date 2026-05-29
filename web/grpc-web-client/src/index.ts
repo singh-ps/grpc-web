@@ -41,8 +41,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Calculator wiring
-    const ops = (Object.keys(Operation).filter(k => isNaN(Number(k))) as Array<keyof typeof Operation>)
-        .map(k => ({ label: k, value: Operation[k] as number }));
+    const ops: { label: string; value: Operation }[] = [
+        { label: "ADD",      value: Operation.ADD },
+        { label: "SUBTRACT", value: Operation.SUBTRACT },
+        { label: "MULTIPLY", value: Operation.MULTIPLY },
+        { label: "DIVIDE",   value: Operation.DIVIDE },
+    ];
 
     const a = document.getElementById("a") as HTMLInputElement;
     const b = document.getElementById("b") as HTMLInputElement;
@@ -82,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         setBusy(go, true, spin);
         try {
-            const res = await (client as any).math(Number(sel.value), av, bv);
+            const res = await client.math(Number(sel.value) as Operation, av, bv);
             ans.value = String(res);
         } catch (ex: any) {
             err.textContent = ex?.message ?? "Calculation failed.";
