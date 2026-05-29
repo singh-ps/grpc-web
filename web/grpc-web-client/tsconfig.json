@@ -5,13 +5,10 @@
     "moduleResolution": "Bundler",
     "noEmit": true,
     "strict": true,
-    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
-
-    "baseUrl": "src",
   },
   "include": ["src"]
 }
